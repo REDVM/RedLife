@@ -1,0 +1,419 @@
+<?xml version="1.0" ?><!--Generated with glade3 3.4.1 on Thu Dec 23 17:57:39 2010 --><interface><object class="GtkAdjustment" id="adjustment1"><property name="upper">3001</property><property name="lower">10</property><property name="page_increment">10</property><property name="step_increment">50</property><property name="page_size">10</property><property name="value">100</property></object><object class="GtkAdjustment" id="adjustment2"><property name="upper">1000</property><property name="lower">65</property><property name="page_increment">10</property><property name="step_increment">1</property><property name="page_size">10</property><property name="value">100</property></object><object class="GtkAdjustment" id="adjustment3"><property name="upper">1000</property><property name="lower">65</property><property name="page_increment">10</property><property name="step_increment">1</property><property name="page_size">10</property><property name="value">100</property></object><object class="GtkUIManager" id="uimanager1"><child><object class="GtkActionGroup" id="actiongroup1"><child><object class="GtkAction" id="actionA"><property name="name">actionA</property><property name="label" translatable="yes">_Action</property></object></child><child><object class="GtkAction" id="pauseAM"><property name="name">pauseAM</property><property name="label" translatable="yes">Pause</property><signal handler="pause" name="activate"/></object></child><child><object class="GtkAction" id="suivantAM"><property name="name">suivantAM</property><property name="label" translatable="yes">Etape suivante</property><signal handler="suivant" name="activate"/></object></child><child><object class="GtkAction" id="viderAM"><property name="name">viderAM</property><property name="label" translatable="yes">Vider</property><signal handler="vider" name="activate"/></object></child><child><object class="GtkAction" id="inverserAM"><property name="name">inverserAM</property><property name="label" translatable="yes">Inverser</property><signal handler="inverser" name="activate"/></object></child><child><object class="GtkAction" id="imagemenuitem5"><property name="name">imagemenuitem5</property><property name="label" translatable="yes">Quitter</property><signal handler="delete" name="activate"/></object></child><child><object class="GtkAction" id="motifAM"><property name="name">motifAM</property><property name="label" translatable="yes">_Motif</property></object></child><child><object class="GtkRadioAction" id="noMotif3"><property name="active">True</property><property name="name">noMotif3</property><property name="label" translatable="yes">Aucun motif</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="rpent1"><property name="group">noMotif3</property><property name="name">rpent1</property><property name="label" translatable="yes">r-pentomino</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="tpent"><property name="group">rpent1</property><property name="name">tpent</property><property name="label" translatable="yes">t-pentomino</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="planeur"><property name="group">tpent</property><property name="name">planeur</property><property name="label" translatable="yes">Planeur</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="vaisseau"><property name="group">planeur</property><property name="name">vaisseau</property><property name="label" translatable="yes">Vaisseau spatial</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="locomotive"><property name="group">vaisseau</property><property name="name">locomotive</property><property name="label" translatable="yes">Locomotive</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="verticale"><property name="group">locomotive</property><property name="name">verticale</property><property name="label" translatable="yes">Barre verticale</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="horizontale"><property name="group">verticale</property><property name="name">horizontale</property><property name="label" translatable="yes">Barre horizontale</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkRadioAction" id="gener"><property name="group">horizontale</property><property name="name">gener</property><property name="label" translatable="yes">Génération aléatoire</property><signal handler="changeMotif" name="toggled"/></object></child><child><object class="GtkAction" id="reglages"><property name="name">reglages</property><property name="label" translatable="yes">_Réglages</property></object></child><child><object class="GtkAction" id="tabTailleAM"><property name="name">tabTailleAM</property><property name="label" translatable="yes">Taille du tableau</property><signal handler="longlarg" name="activate"/></object></child><child><object class="GtkAction" id="autoRegleAM"><property name="name">autoRegleAM</property><property name="label" translatable="yes">Règles de l'automate</property><signal handler="regler" name="activate"/></object></child><child><object class="GtkAction" id="menuitem4"><property name="name">menuitem4</property><property name="label" translatable="yes">Aid_e</property></object></child><child><object class="GtkAction" id="imagemenuitem10"><property name="name">imagemenuitem10</property><property name="label" translatable="yes">A propos</property><signal handler="about" name="activate"/></object></child></object></child><ui><menubar name="menubar"><menu action="actionA"><menuitem action="pauseAM"/><menuitem action="suivantAM"/><menuitem action="viderAM"/><menuitem action="inverserAM"/><separator/><menuitem action="imagemenuitem5"/></menu><menu action="motifAM"><menuitem action="noMotif3"/><menuitem action="rpent1"/><menuitem action="tpent"/><menuitem action="planeur"/><menuitem action="vaisseau"/><menuitem action="locomotive"/><menuitem action="verticale"/><menuitem action="horizontale"/><menuitem action="gener"/></menu><menu action="reglages"><menuitem action="tabTailleAM"/><menuitem action="autoRegleAM"/></menu><menu action="menuitem4"><menuitem action="imagemenuitem10"/></menu></menubar></ui></object>
+  <object class="GtkWindow" id="fen1">
+    <property name="width_request">457</property>
+    <property name="height_request">596</property>
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">Redlife 2.0 - automate cellulaire en 2D</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="icon">logo.png</property>
+    <property name="deletable">False</property>
+    <signal handler="delete" name="delete_event"/>
+    <signal handler="delete" name="destroy_event"/>
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkMenuBar" constructor="uimanager1" id="menubar">
+            <property name="visible">True</property>
+            
+            
+            
+            
+          </object>
+          <packing>
+            <property name="expand">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToolbar" id="toolbar">
+            <property name="visible">True</property>
+            <property name="toolbar_style">GTK_TOOLBAR_BOTH</property>
+            <property name="icon_size">GTK_ICON_SIZE_SMALL_TOOLBAR</property>
+            <child>
+              <object class="GtkToggleToolButton" id="Apause">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Pause</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-media-pause</property>
+                <signal handler="pause" name="toggled"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="suivantA">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Etape suivante</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-media-next</property>
+                <signal handler="suivant" name="clicked"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="toolbutton1">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Vider</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-redo</property>
+                <signal handler="vider" name="clicked"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="Ainverser">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Inverser</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-refresh</property>
+                <signal handler="inverser" name="clicked"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparatorToolItem" id="toolbutton2">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="aboutAM">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">A propos</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-about</property>
+                <signal handler="about" name="clicked"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="quitAM">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Quitter</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-quit</property>
+                <signal handler="delete" name="clicked"/>
+              </object>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVBox" id="vbox4">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkEventBox" id="eventBox">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_STRUCTURE_MASK</property>
+                <signal handler="clickd" name="button_press_event"/>
+                <signal handler="fill_canvas" name="expose_event"/>
+                <signal handler="move" name="motion_notify_event"/>
+                <child>
+                  <object class="GtkDrawingArea" id="canvas">
+                    <property name="visible">True</property>
+                    <signal handler="fill_canvas" name="expose_event"/>
+                    <signal handler="configure_canvas" name="configure_event"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkHSeparator" id="hseparator1">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHScale" id="ruler">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="adjustment">adjustment1</property>
+                <property name="digits">0</property>
+                <signal handler="modifVitesse" name="value_changed"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="statusBar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="dialog1">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Taille du tableau</property>
+    <property name="resizable">False</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="icon">logo.png</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="transient_for">fen1</property>
+    <property name="opacity">0.93000000715255737</property>
+    <property name="has_separator">False</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkVBox" id="vbox2">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Longueur :</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="Alongueur">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="adjustment">adjustment2</property>
+                <property name="climb_rate">1</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Largeur : </property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="Alargeur">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="adjustment">adjustment3</property>
+                <property name="climb_rate">1</property>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkButton" id="ok">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">OK</property>
+                
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  <action-widgets><action-widget response="0">ok</action-widget></action-widgets></object>
+  <object class="GtkDialog" id="dialog2">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Règles de l'automate</property>
+    <property name="resizable">False</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="icon">logo.png</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="transient_for">fen1</property>
+    <property name="opacity">0.93000000715255737</property>
+    <property name="has_separator">False</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox3">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkVBox" id="vbox3">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Nombres de cellules vivantes voisines 
+d'une cellule morte pour qu'elle vive :</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="AregleM">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">3</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label4">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Nombres de cellules vivantes voisines 
+d'une cellule vivante reste vivante :</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="AregleV">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">2,3</property>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area3">
+            <property name="visible">True</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkButton" id="ok1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">OK</property>
+                
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  <action-widgets><action-widget response="0">ok1</action-widget></action-widgets></object>
+  <object class="GtkAboutDialog" id="aboutdialog1">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">RedLife - A propos</property>
+    <property name="resizable">False</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="icon">logo.png</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="gravity">GDK_GRAVITY_CENTER</property>
+    <property name="transient_for">fen1</property>
+    <property name="opacity">0.93000000715255737</property>
+    <property name="program_name">RedLife</property>
+    <property name="version">2.0</property>
+    <property name="comments" translatable="yes">RedLife est un automate cellulaire en 2D
+créé en 2010 par Victor MARTIN 
+en python et GTK+.</property>
+    <property name="website">http://victormartin.kegtux.org</property>
+    <property name="website_label" translatable="yes">	Victor MARTIN Website
+(http://victormartin.kegtux.org/)</property>
+    <property name="license" translatable="yes">    RedLife is a cellular automaton created in 2010 by Victor MARTIN with python and GTK+.
+    Copyright (C) 2010  Victor MARTIN
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</property>
+    <property name="authors">Victor MARTIN &lt;victormartin@live.jp&gt;</property>
+    <property name="logo">logo.png</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox6">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area6">
+            <property name="visible">True</property>
+            <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+            <property name="extension_events">GDK_EXTENSION_EVENTS_CURSOR</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
